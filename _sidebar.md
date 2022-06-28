@@ -1,2 +1,2 @@
 - [Introduction](README.md)
-- [Example notebook](example-notebook/README.md)
+- [notes](example-notebook/README.md)
