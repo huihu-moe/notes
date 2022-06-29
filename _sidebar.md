@@ -1,2 +1,3 @@
 - [Introduction](README.md)
-- [notes](example-notebook/README.md)
+- [notes](notebook/README.md)
+- [algorithm notes](/algorithm-notebook/README.md)
