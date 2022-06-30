@@ -1,6 +1,5 @@
 - [Go back](../README.md)
 - [Introduction](README.md)
-- [Hello world](hello-world.md)
 - [docker 安装 hbase](2022-05-docker-%E5%AE%89%E8%A3%85-hbase.md)
 - [docker 安装 neo4j](2022-05-docker-%E5%AE%89%E8%A3%85-neo4j.md)
 - [记一次 Btrfs 下的 Timeshift 使用问题](2022-05-%E8%AE%B0%E4%B8%80%E6%AC%A1-Btrfs-%E4%B8%8B%E7%9A%84-Timeshift-%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98.md)
