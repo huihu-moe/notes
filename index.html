@@ -39,6 +39,25 @@
           crossChapter: true,
           crossChapterText: true,
         },
+
+        copyCode: {
+          buttonText : 'Copy to clipboard',
+          errorText  : 'Error',
+          successText: 'Copied'
+        },
+
+        markdown: {
+          renderer: {
+            code: function(code, lang) {
+              if (lang === "mermaid") {
+                return (
+                  '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+                );
+              }
+              return this.origin.code.apply(this, arguments);
+            }
+          }
+        },
       };
     </script>
     <!-- Docsify v4 -->
@@ -46,5 +65,6 @@
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   </body>
 </html>
