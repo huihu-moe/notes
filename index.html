@@ -17,6 +17,8 @@
     />
 
     <link rel="stylesheet" href="assets/css/custom.css" />
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"/>
   </head>
   <body>
     <div id="app">Loading content...</div>
@@ -57,21 +59,13 @@
               return this.origin.code.apply(this, arguments);
             }
           }
-        },
-        plugins: [
-          function (hook) {
-            hook.beforeEach(function (content) {
-              return content.replace(/\$\$([\s\S]*?)\$\$/g, function (m, code) {
-                console.log(code)
-                return katex.renderToString(code.trim())
-              })
-            })
-          }
-        ]
+        },        
       };
     </script>
     <!-- Docsify v4 -->
-    <script src="//unpkg.com/katex/dist/katex.min.js"></script>
+    <!-- CDN files for docsify-katex -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+    <!-- or <script src="//cdn.jsdelivr.net/gh/upupming/docsify-katex@latest/dist/docsify-katex.js"></script> -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
