@@ -1,5 +1,7 @@
 # LRU缓存设计
 
+[146. LRU Cache](https://leetcode.com/problems/lru-cache/)
+
 ```java
 import java.util.*;
 
