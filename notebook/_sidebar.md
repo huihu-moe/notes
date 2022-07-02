@@ -20,3 +20,4 @@
 - [ArchLinux 安装过程](2022-06-archlinux-install.md)
 - [与运算代替取模](2022-06-%E4%B8%8E%E8%BF%90%E7%AE%97%E4%BB%A3%E6%9B%BF%E5%8F%96%E6%A8%A1.md)
 - [设计模式](./design-pattern/README.md)
+- [Bean 循环依赖](2022-06-Bean-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.md)
