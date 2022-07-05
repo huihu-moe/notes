@@ -21,3 +21,5 @@
 - [与运算代替取模](2022-06-%E4%B8%8E%E8%BF%90%E7%AE%97%E4%BB%A3%E6%9B%BF%E5%8F%96%E6%A8%A1.md)
 - [设计模式](./design-pattern/README.md)
 - [Bean 循环依赖](2022-06-Bean-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.md)
+- [IOC & AOP 循环依赖](2022-06-IOC%26AOP-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.md)
+- [Win XP 无法安装 virtualbox guest additions](2022-07-WINXP-%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85vboxGuest.md)
