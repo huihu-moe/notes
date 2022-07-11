@@ -1,4 +1,4 @@
-# Move Pieces to Obtain a String
+# 2337. Move Pieces to Obtain a String
 
 LeetCode 周赛的一道题，想了半天才想出来。又是糟糕的一次周赛，不知道为什么答题没有提交成功。
 
