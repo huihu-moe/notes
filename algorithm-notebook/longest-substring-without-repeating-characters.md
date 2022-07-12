@@ -9,8 +9,7 @@ class Solution {
             return 0;
         }
         HashMap<Character, Integer> map = new HashMap<>();
-        int n = s.length(), left = 0, right = 0;
-        int res = 1;
+        int n = s.length(), left = 0, right = 0, res = 0;        
         while (right < n) {
             char ch = s.charAt(right);
             if (map.containsKey(ch)) {                
