@@ -12,3 +12,4 @@
 - [2337. Move Pieces to Obtain a String](move-pieces-to-obtain-a-string.md)
 - [416. Partition Equal Subset Sum](partition-equal-subset-sum.md)
 - [101. Symmetric Tree](symmetric-tree.md)
+- [路径压缩的 Quick Union 算法](%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E7%9A%84-Quick-Union.md)
