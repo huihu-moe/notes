@@ -16,3 +16,4 @@
 - [2344. Minimum Deletions to Make Array Divisible](minimum-deletions-to-make-array-divisible.md)
 - [[239] Sliding Window Maximum](239.sliding-window-maximum.md)
 - [[11] Container With Most Water](container-with-most-water.md)
+- [[32] Longest Valid Parentheses](longest-valid-parentheses.md)
