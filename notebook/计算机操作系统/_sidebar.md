@@ -1,5 +1,3 @@
 - [Go back](../README.md)
-- [Introduction](README.md)
 - [计算机操作系统 I/O 模型](计算机操作系统-IO-模型.md)
-- **Win**
-- [Win XP 无法安装 virtualbox guest additions](Win-XP-无法安装-vboxGuest.md)
+- [计算机操作系统 I/O 复用](%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-IO-%E5%A4%8D%E7%94%A8.md)

@@ -1,5 +1,4 @@
 - [Go back](../README.md)
-- [Introduction](README.md)
 - [计算机网络 TCP](计算机网络-TCP.md)
 - [计算机网络 HTTP](计算机网络-HTTP.md)
 - [计算机网络 网络设备](计算机网络-网络设备.md)

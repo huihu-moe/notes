@@ -1,5 +1,4 @@
 - [Go back](../README.md)
-- [Introduction](README.md)
 - [Java 拷贝](Java-拷贝.md)
 - [Java 泛型](Java-泛型.md)
 - [Java 双亲委派机制](Java-双亲委派机制.md)

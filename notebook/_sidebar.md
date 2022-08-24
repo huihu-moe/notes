@@ -1,5 +1,4 @@
 - [Go back](../README.md)
-- [Introduction](README.md)
 - [Java](./Java/README.md)
 - [Docker](./Docker/README.md)
 - [Linux](./Linux/README.md)
