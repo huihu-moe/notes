@@ -9,7 +9,6 @@
 - [Java volatile 关键字](Java-volatile-关键字.md)
 - [Java final 关键字](Java-final-关键字.md)
 - [与运算代替取模](与运算代替取模.md)
-- [设计模式](./design-pattern/README.md)
 - [Bean 循环依赖问题](Bean-循环依赖问题.md)
 - [IOC & AOP 循环依赖](IOC-&-AOP-循环依赖.md)
 - [Java String](Java-String.md)
