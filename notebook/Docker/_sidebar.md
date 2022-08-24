@@ -1,4 +1,3 @@
 - [Go back](../README.md)
-- [Introduction](README.md)
 - [docker 安装 hbase](docker-安装-hbase.md)
 - [docker 安装 neo4j](docker-安装-neo4j.md)
