@@ -1,2 +1,0 @@
-- [notebook](notebook/README.md)
-- [algorithm notebook](/algorithm-notebook/README.md)

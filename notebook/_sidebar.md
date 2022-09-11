@@ -1,8 +1,0 @@
-- [Go back](../README.md)
-- [Java](./Java/README.md)
-- [Docker](./Docker/README.md)
-- [Linux](./Linux/README.md)
-- [MySQL](./MySQL/README.md)
-- [计算机网络](./计算机网络/README.md)
-- [计算机操作系统](./计算机操作系统/README.md)
-- [Windows](./Windows/README.md)

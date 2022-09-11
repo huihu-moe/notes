@@ -1,2 +1,0 @@
-- [Go back](../README.md)
-- [MySQL](MySQL.md)

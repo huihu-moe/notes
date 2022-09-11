@@ -1,1 +1,8 @@
-# notes
+- [Java](./category/Java.md)
+- [Docker](./category/Docker.md)
+- [Linux](./category/Linux.md)
+- [MySQL](./category/MySQL.md)
+- [计算机网络](./category/Network.md)
+- [计算机操作系统](./category/OS.md.md)
+- [Windows](./category/Windows.md)
+- [算法](./category/Algorithm.md)

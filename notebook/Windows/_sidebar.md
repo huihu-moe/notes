@@ -1,2 +1,0 @@
-- [Go back](../README.md)
-- [Win XP 无法安装 virtualbox guest additions](Win-XP-无法安装-vboxGuest.md)
