@@ -1,1 +1,0 @@
-- [Win XP 无法安装 virtualbox guest additions](/docs/Win-XP-无法安装-vboxGuest.md)

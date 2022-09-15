@@ -1,2 +1,0 @@
-- [记一次 Btrfs 下的 Timeshift 使用问题](/docs/记一次-Btrfs-下的-Timeshift-使用问题.md)
-- [安装 ArchLinux](/docs/install-ArchLinux.md)
