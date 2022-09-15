@@ -1,4 +1,4 @@
-# ArchLinux 安装
+# ArchLinux 安装记录
 
 粗略记一下 ArchLinux 安装过程，使用 btrfs 和 wayfire。
 
