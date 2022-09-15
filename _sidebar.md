@@ -9,7 +9,7 @@
   - [Longest Valid Parentheses](docs/算法/longest-valid-parentheses.md)
   - [LRU缓存设计](docs/算法/LRU-缓存设计.md)
   - [Maximum Product Subarray](docs/算法/maximum-product-subarray.md)
-  - [Minimum Deletions to Make Array Divisible](docs/算法/minimum-deletions-to-make-array-divisible.md))
+  - [Minimum Deletions to Make Array Divisible](docs/算法/minimum-deletions-to-make-array-divisible.md)
   - [Minimum Window Substring](docs/算法/minimum-window-substring.md)
   - [Move Pieces to Obtain a String](docs/算法/move-pieces-to-obtain-a-string.md)
   - [Partition Equal Subset Sum](docs/算法/partition-equal-subset-sum.md)
