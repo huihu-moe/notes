@@ -2,30 +2,74 @@
 
 > 参考[Java基础-泛型机制详解](https://pdai.tech/md/java/basic/java-basic-x-generic.html)
 
-泛型的本质是为了参数化类型（在不创建新的类型的情况下，通过泛型指定的不同类型来控制形参具体限制的类型）。
+## 为什么使用泛型？
 
-意义：
+1. 适用于多种数据类型执行相同的代码
+2. 在使用时指定泛型的具体类型，不需要强制类型转换（类型安全，编译器会检查类型）
 
-- 适用于多种数据类型执行相同的代码（代码复用）
-- 泛型中的类型在使用时指定，不需要（人为地）强制类型转换（类型安全，编译器会检查类型）
+## 使用泛型和泛型方法？
 
-## 泛型的使用
+### 泛型类
 
 ```java
-class Point<T>{         
-    private T var ;     
-    public T getVar(){  
+class Point<T>{         // 此处可以随便写标识符号，T是type的简称  
+    private T var ;     // var的类型由T指定，即：由外部指定  
+    public T getVar(){  // 返回值的类型由外部决定  
         return var ;  
+    }  
+    public void setVar(T var){  // 设置的类型也由外部决定  
+        this.var = var ;  
+    }  
+}  
+public class GenericsDemo{  
+    public static void main(String args[]){  
+        Point<String> p = new Point<String>() ;     // 里面的var类型为String类型  
+        p.setVar("it") ;                            // 设置字符串  
+        System.out.println(p.getVar().length()) ;   // 取得字符串的长度  
+    }  
+}
+```
+
+### 泛型接口
+
+```java
+interface Info<T>{        // 在接口上定义泛型  
+    public T getVar() ; // 定义抽象方法，抽象方法的返回值就是泛型类型  
+}  
+class InfoImpl<T> implements Info<T>{   // 定义泛型接口的子类  
+    private T var ;             // 定义属性  
+    public InfoImpl(T var){     // 通过构造方法设置属性内容  
+        this.setVar(var) ;    
     }  
     public void setVar(T var){  
         this.var = var ;  
     }  
+    public T getVar(){  
+        return this.var ;  
+    }  
+} 
+public class GenericsDemo{  
+    public static void main(String arsg[]){  
+        Info<String> i = null;        // 声明接口对象  
+        i = new InfoImpl<String>("汤姆") ;  // 通过子类实例化对象  
+        System.out.println("内容：" + i.getVar()) ;  
+    }  
 }  
-public class GenericsDemo06{  
+```
+
+### 泛型方法
+
+```java
+public class GenericsDemo{  
+    public <T> void getClassStr(T t) {
+        System.out.println(t.getClass());
+    }
+
     public static void main(String args[]){  
-        Point<String> p = new Point<String>() ;     
-        p.setVar("it") ;                            
-        System.out.println(p.getVar().length()) ;   
+        GenericsDemo g = new GenericsDemo();
+        g.get(new String("123"));
+        g.get(new Integer("123"));
+        g.get(new Double("123"));
     }  
 }
 ```
@@ -40,12 +84,6 @@ public class GenericsDemo06{
 <?> 无限制通配符
 <? extends E> extends 关键字声明了类型的上界，表示参数化的类型可能是所指定的类型，或者是此类型的子类
 <? super E> super 关键字声明了类型的下界，表示参数化的类型可能是指定的类型，或者是此类型的父类
-
-// 使用原则《Effictive Java》
-// 为了获得最大限度的灵活性，要在表示 生产者或者消费者 的输入参数上使用通配符，使用的规则就是：生产者有上限、消费者有下限
-1. 如果参数化类型表示一个 T 的生产者，使用 < ? extends T>;
-2. 如果它表示一个 T 的消费者，就使用 < ? super T>；
-3. 如果既是生产又是消费，那使用通配符就没什么意义了，因为你需要的是精确的参数类型。
 ```
 
 ## 理解泛型
@@ -60,20 +98,6 @@ Java泛型这个特性是从JDK1.5才开始加入的，因此为了兼容之前�
 - 根据类型参数的上下界推断并替换所有的类型参数为原生态类型：如果类型参数是无限制通配符或没有上下界限定则替换为Object，如果存在上下界限定则根据子类替换原则取类型参数的最左边限定类型（即父类）。
 - 为了保证类型安全，必要时插入强制类型转换代码。
 - 自动产生“桥接方法”以保证擦除类型后的代码仍然具有泛型的“多态性”。
-
-### 类型擦除
-
-- 擦除类定义中的类型参数 - 无限制类型擦除
-
-当类定义中的类型参数没有任何限制时，在类型擦除中直接被替换为Object，即形如`<T>`和<?>的类型参数都被替换为Object。
-
-- 擦除类定义中的类型参数 - 有限制类型擦除
-
-当类定义中的类型参数存在限制（上下界）时，在类型擦除中替换为类型参数的上界或者下界，比如形如`<T extends Number>`和`<? extends Number>`的类型参数被替换为Number，`<? super Number>`被替换为Object。
-
-- 擦除方法定义中的类型参数
-
-擦除方法定义中的类型参数原则和擦除类定义中的类型参数是一样的，这里仅以擦除方法定义中的有限制类型参数为例。
 
 ### 原始类型
 
@@ -90,8 +114,8 @@ public class Test {
 
         /**不指定泛型的时候*/  
         int i = Test.add(1, 2); //这两个参数都是Integer，所以T为Integer类型  
-        Number f = Test.add(1, 1.2); //这两个参数一个是Integer，以风格是Float，所以取同一父类的最小级，为Number  
-        Object o = Test.add(1, "asd"); //这两个参数一个是Integer，以风格是Float，所以取同一父类的最小级，为Object  
+        Number f = Test.add(1, 1.2); //这两个参数一个是Integer，一个是Float，所以取同一父类的最小级，为Number  
+        Object o = Test.add(1, "asd"); //这两个参数一个是Integer，一个是String，所以取同一父类的最小级，为Object  
 
         /**指定泛型的时候*/  
         int a = Test.<Integer>add(1, 2); //指定了Integer，所以只能为Integer类型或者其子类  
@@ -158,7 +182,7 @@ class Pair {
 } 
 ```
 
-因此，如果是在非泛型继承关系中，子类DateInter会重写父类方法而不是重载。而在泛型继承关系中，JVM为了实现泛型的多态，采用了桥方法。
+因此，如果是在非泛型继承关系中，子类DateInter会重载而不是重写。而在泛型继承关系中，JVM为了实现泛型的多态，采用了桥方法。
 
 ```java
 class com.tao.test.DateInter extends com.tao.test.Pair<java.util.Date> {  
@@ -182,13 +206,13 @@ class com.tao.test.DateInter extends com.tao.test.Pair<java.util.Date> {
        4: checkcast     #26                 // class java/util/Date  
        7: areturn  
 
-  public java.lang.Object getValue();     //编译时由编译器生成的巧方法  
+  public java.lang.Object getValue();     //编译时由编译器生成的桥方法  
     Code:  
        0: aload_0  
        1: invokevirtual #28                 // Method getValue:()Ljava/util/Date 去调用我们重写的getValue方法;  
        4: areturn  
 
-  public void setValue(java.lang.Object);   //编译时由编译器生成的巧方法  
+  public void setValue(java.lang.Object);   //编译时由编译器生成的桥方法  
     Code:  
        0: aload_0  
        1: aload_1  
@@ -205,53 +229,3 @@ class com.tao.test.DateInter extends com.tao.test.Pair<java.util.Date> {
 - 不能抛出也不能捕获泛型类的对象。事实上，泛型类扩展Throwable都不合法。
 - 不能再catch子句中使用泛型变量
 - 可以在异常声明中可以使用泛型变量
-
-```java
-public static<T extends Throwable> void doWork(T t) throws T {
-    try{
-        ...
-    } catch(Throwable realCause) {
-        t.initCause(realCause);
-        throw t; 
-    }
-}
-```
-
-### 泛型的参数类型
-
-可以通过反射（java.lang.reflect.Type）获取泛型
-
-java.lang.reflect.Type是Java中所有类型的公共高级接口,代表了Java中的所有类型。Type体系中类型的包括：数组类型(GenericArrayType)、参数化类型(ParameterizedType)、类型变量(TypeVariable)、通配符类型(WildcardType)、原始类型(Class)、基本类型(Class),以上这些类型都实现Type接口。
-
-```java
-public class GenericType<T> {
-    private T data;
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public static void main(String[] args) {
-        GenericType<String> genericType = new GenericType<String>() {};
-        Type superclass = genericType.getClass().getGenericSuperclass();
-        //getActualTypeArguments 返回确切的泛型参数, 如Map<String, Integer>返回[String, Integer]
-        Type type = ((ParameterizedType) superclass).getActualTypeArguments()[0]; 
-        System.out.println(type);//class java.lang.String
-    }
-}
-
-public interface ParameterizedType extends Type {
-    // 返回确切的泛型参数, 如Map<String, Integer>返回[String, Integer]
-    Type[] getActualTypeArguments();
-    
-    //返回当前class或interface声明的类型, 如List<?>返回List
-    Type getRawType();
-    
-    //返回所属类型. 如,当前类型为O<T>.I<S>, 则返回O<T>. 顶级类型将返回null 
-    Type getOwnerType();
-}
-```
