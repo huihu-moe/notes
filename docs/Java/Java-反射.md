@@ -1,187 +1,76 @@
-# 反射使用例子
+# Java 反射
 
-[深入解析Java反射（1） - 基础 ](https://www.sczyh30.com/posts/Java/java-reflection-1/)
-
-1. 获得 Class 对象
-
-方法有三种：
-
-(1) 使用 Class 类的 forName 静态方法:
+## 获取Class类对象
 
 ```java
-public static Class<?> forName(String className)
-
-// 比如在 JDBC 开发中常用此方法加载数据库驱动:
-Class.forName(driver);
- ```
- 
-(2) 直接获取某一个对象的 class，比如:
-
-```java
-Class<?> klass = int.class;
-Class<?> classInt = Integer.TYPE;
-```
-
-(3) 调用某个对象的 getClass() 方法，比如:
-
-```java
-StringBuilder str = new StringBuilder("123");
-Class<?> klass = str.getClass();
-```
-
-2. 判断是否为某个类的实例
-
-```java
-public native boolean isInstance(Object obj);
-```
-
-3. 创建实例
-
-- 使用Class对象的newInstance()方法来创建Class对象对应类的实例。
-
-```java
-Class<?> c = String.class;
-Object str = c.newInstance();
-```
-
-
-- 先通过Class对象获取指定的Constructor对象，再调用Constructor对象的newInstance()方法来创建实例。这种方法可以用指定的构造器构造类的实例。
-
-```java
-//获取String所对应的Class对象
-Class<?> c = String.class;
-//获取String类带一个String参数的构造器
-Constructor constructor = c.getConstructor(String.class);
-//根据构造器创建实例
-Object obj = constructor.newInstance("23333");
-System.out.println(obj);
-```
-
-4. 获取方法
-
-- getDeclaredMethods 方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。
-
-```java
-public Method[] getDeclaredMethods() throws SecurityException
-```
-
-- getMethods 方法返回某个类的所有公用（public）方法，包括其继承类的公用方法。
-
-```java
-public Method[] getMethods() throws SecurityException
-```
-
-- getMethod 方法返回一个特定的方法，其中第一个参数为方法名称，后面的参数为方法的参数对应Class的对象。
-
-```java
-public Method getMethod(String name, Class<?>... parameterTypes)
-```
-
-```java
-package org.ScZyhSoft.common;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-public class test1 {
-	public static void test() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-	        Class<?> c = methodClass.class;
-	        Object object = c.newInstance();
-	        Method[] methods = c.getMethods();
-	        Method[] declaredMethods = c.getDeclaredMethods();
-	        //获取methodClass类的add方法
-	        Method method = c.getMethod("add", int.class, int.class);
-	        //getMethods()方法获取的所有方法
-	        System.out.println("getMethods获取的方法：");
-	        for(Method m:methods)
-	            System.out.println(m);
-	        //getDeclaredMethods()方法获取的所有方法
-	        System.out.println("getDeclaredMethods获取的方法：");
-	        for(Method m:declaredMethods)
-	            System.out.println(m);
-	    }
+    @Test
+    public void classTest() throws Exception {
+        // 获取Class对象的三种方式
+        logger.info("根据类名:  \t" + User.class);
+        logger.info("根据对象:  \t" + new User().getClass());
+        logger.info("根据全限定类名:\t" + Class.forName("com.test.User"));
+        // 常用的方法
+        logger.info("获取全限定类名:\t" + userClass.getName());
+        logger.info("获取类名:\t" + userClass.getSimpleName());
+        logger.info("实例化:\t" + userClass.newInstance());
     }
-class methodClass {
-    public final int fuck = 3;
-    public int add(int a,int b) {
-        return a+b;
-    }
-    public int sub(int a,int b) {
-        return a+b;
-    }
-}
 ```
 
-5. 获取构造器信息
+## 获取Construct类对象
 
-获取类构造器的用法与上述获取方法的用法类似。主要是通过Class类的getConstructor方法得到Constructor类的一个实例，而Constructor类有一个newInstance方法可以创建一个对象实例:
+| 方法返回值                 | 方法名称                                           | 方法说明                                                  |
+|----------------------------|----------------------------------------------------|-----------------------------------------------------------|
+| static Class<?>            | forName(String className)                          | 返回与带有给定字符串名的类或接口相关联的 Class 对象       |
+| Constructor                | getConstructor(Class<?>... parameterTypes)         | 返回指定参数类型、具有public访问权限的构造函数对象        |
+| Constructor<?>[]           | getConstructors()                                  | 返回所有具有public访问权限的构造函数的Constructor对象数组 |
+| Constructor                | getDeclaredConstructor(Class<?>... parameterTypes) | 返回指定参数类型、所有声明的（包括private）构造函数对象   |
+| Constructor<?>[]           | getDeclaredConstructors()                          | 返回所有声明的（包括private）构造函数对象                 |
+| T                          | newInstance()                                      | 调用无参构造器创建此 Class 对象所表示的类的一个新实例     |
 
 ```java
-public T newInstance(Object ... initargs)
+Class<?> clazz = null;
+
+//获取Class对象的引用
+clazz = Class.forName("com.example.javabase.User");
+
+//第一种方法，实例化默认构造方法，User必须无参构造函数,否则将抛异常
+User user = (User) clazz.newInstance();
+user.setAge(20);
+user.setName("Jack");
+System.out.println(user);
 ```
 
-6. 获取类的成员变量（字段）信息
+## 获取Field对象
 
-- getFiled：访问公有的成员变量
-- getDeclaredField：所有已声明的成员变量，但不能得到其父类的成员变量
-- getFileds 和 getDeclaredFields 方法用法同上（参照 Method）
-
-7. 调用方法
-
-当我们从类中获取了一个方法后，我们就可以用 invoke() 方法来调用这个方法。invoke 方法的原型为:
+| 方法返回值 | 方法名称                      | 方法说明                                                                     |
+|------------|-------------------------------|------------------------------------------------------------------------------|
+| Field      | getDeclaredField(String name) | 获取指定name名称的(包含private修饰的)字段，不包括继承的字段                  |
+| Field[]    | getDeclaredFields()           | 获取Class对象所表示的类或接口的所有(包含private修饰的)字段，不包括继承的字段 |
+| Field      | getField(String name)         | 获取指定name名称、具有public修饰的字段，包含继承字段                         |
+| Field[]    | getFields()                   | 获取修饰符为public的字段，包含继承字段                                       |
 
 ```java
-public Object invoke(Object obj, Object... args)
-        throws IllegalAccessException, IllegalArgumentException,
-           InvocationTargetException
+Class<?> clazz = Class.forName("reflect.Student");
+//获取指定字段名称的Field类,注意字段修饰符必须为public而且存在该字段,
+// 否则抛NoSuchFieldException
+Field field = clazz.getField("age");
+System.out.println("field:"+field);
 ```
 
-invoke 使用例子
+## 获取Method对象
+
+| 方法返回值 | 方法名称                                                  |           方法说明                                                                                                                                                      |
+|------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Method     | getDeclaredMethod(String name Class<?>... parameterTypes) |   返回一个指定参数的Method对象，该对象反映此 Class 对象所表示的类或接口的指定已声明方法。                                                                               |
+| Method[]   | getDeclaredMethods()                                      |   返回 Method 对象的一个数组，这些对象反映此 Class 对象表示的类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。                     |
+| Method     | getMethod(String name Class<?>... parameterTypes)         |   返回一个 Method 对象，它反映此 Class 对象所表示的类或接口的指定公共成员方法。                                                                                         |
+| Method[]   | getMethods()                                              |   返回一个包含某些 Method 对象的数组，这些对象反映此 Class 对象所表示的类或接口（包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口）的公共 member 方法。 |
 
 ```java
-public class test1 {
-    public static void main(String[] args) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        Class<?> klass = methodClass.class;
-        //创建methodClass的实例
-        Object obj = klass.newInstance();
-        //获取methodClass类的add方法
-        Method method = klass.getMethod("add",int.class,int.class);
-        //调用method对应的方法 => add(1,4)
-        Object result = method.invoke(obj,1,4);
-        System.out.println(result);
-    }
-}
-class methodClass {
-    public final int fuck = 3;
-    public int add(int a,int b) {
-        return a+b;
-    }
-    public int sub(int a,int b) {
-        return a+b;
-    }
-}
-```
+Class clazz = Class.forName("reflect.Circle");
 
-8. 通过反射创建数组
+//根据参数获取public的Method,包含继承自父类的方法
+Method method = clazz.getMethod("draw",int.class,String.class);
 
-```java
-public static void testArray() throws ClassNotFoundException {
-    Class<?> cls = Class.forName("java.lang.String");
-    Object array = Array.newInstance(cls,25);
-    //往数组里添加内容
-    Array.set(array,0,"hello");
-    Array.set(array,1,"Java");
-    Array.set(array,2,"fuck");
-    Array.set(array,3,"Scala");
-    Array.set(array,4,"Clojure");
-    //获取某一项的内容
-    System.out.println(Array.get(array,3));
-}
-```
-
-其中的Array类为java.lang.reflect.Array类。我们通过Array.newInstance()创建数组对象，它的原型是:
-
-```java
-public static Object newInstance(Class<?> componentType, int length)
-        throws NegativeArraySizeException {
-        return newArray(componentType, length);
-    }
+System.out.println("method:"+method);
 ```
